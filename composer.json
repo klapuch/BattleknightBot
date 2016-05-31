@@ -1,0 +1,13 @@
+{
+  "require": {
+    "nette/tester": "^1.7",
+    "klapuch/ini": "dev-master",
+    "guzzlehttp/guzzle": "^6.2",
+    "mockery/mockery": "^0.9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Battleknight\\Bot\\": "Bot/"
+    }
+  }
+}

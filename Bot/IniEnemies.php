@@ -36,7 +36,7 @@ final class IniEnemies implements Enemies {
         if(!$exists)
             throw new \UnexpectedValueException('Enemy is not in the list');
         $this->ini->remove($enemy->id());
-        $this->ini->write([$enemy->id() => $enemy->name()]);
+        $this->make($enemy);
         return $this;
     }
 }

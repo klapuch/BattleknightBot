@@ -9,12 +9,43 @@ use Klapuch\Ini;
 define('SETTING', __DIR__ . '/Configuration/config.ini');
 define('ENEMIES', __DIR__ . '/Configuration/enemies.ini');
 $setting = (new Ini\Valid(SETTING, new Ini\Typed(SETTING)))->read();
-$enemies = new Ini\Valid(ENEMIES, new Ini\Typed(ENEMIES));
 $http = new GuzzleHttp\Client([
     'base_uri' => $setting['url'],
     'allow_redirects' => true,
     'cookies' => new GuzzleHttp\Cookie\FileCookieJar($setting['cookie']),
 ]);
-$entrance = new Bot\HttpEntrance($http);
-$knight = $entrance->enter($setting['username'], $setting['password']);
-//TODO
+try {
+    $enemies = new Bot\IniEnemies(new Ini\Valid(ENEMIES, new Ini\Typed(ENEMIES)));
+    foreach($enemies->iterate() as $enemy) {
+        $knight = (new Bot\HttpEntrance($http))->enter(
+            $setting['username'],
+            $setting['password']
+        );
+        $duel = $knight->attack($enemy);
+        $enemies->toBottom($enemy);
+        if($duel->draw())
+            throw new \Exception('Draw - nobody wins');
+        sprintf(
+            '%s won %d silvers and %d experiences',
+            $duel->winner(),
+            $duel->loot()->silvers(),
+            $duel->loot()->experience()->value()
+        );
+        echo "\r\n";
+        sprintf(
+            'You have done %d damage and enemy to you %d',
+            $duel->damage()->done(),
+            $duel->damage()->taken()
+        );
+        echo "\r\n";
+        sprintf(
+            'After fight you have %d life, %d experiences and %d silvers',
+            $knight->life(),
+            $knight->experiences()->actual(),
+            $knight->silvers()
+        );
+        sleep($setting['break']);
+    }
+} catch(\Throwable $ex) {
+    echo $ex->getMessage();
+}

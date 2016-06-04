@@ -44,11 +44,12 @@ try {
             $knight->experiences()->actual(),
             $knight->silvers()
         );
-        echo "\r\n";
-        printf('Waiting to next fight for %d seconds...', $setting['break']);
-        echo "\r\n";
-        sleep($setting['break'] + random_int(10, 20));
     }
 } catch(\Throwable $ex) {
     echo $ex->getMessage();
+} finally {
+    echo "\r\n";
+    printf('Waiting to next fight for %d seconds...', $setting['break']);
+    echo "\r\n";
+    sleep($setting['break'] + random_int(10, 20));
 }

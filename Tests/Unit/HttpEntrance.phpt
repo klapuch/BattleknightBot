@@ -16,14 +16,6 @@ use GuzzleHttp;
 require __DIR__ . '/../bootstrap.php';
 
 final class HttpEntrance extends TestCase\Mockery {
-    private $dom;
-
-    public function setUp() {
-        parent::setUp();
-        $this->dom = new \DOMDocument();
-        @$this->dom->loadHTMLFile(__DIR__ . '/../fight.html');
-    }
-
     public function testEnteringWithCorrectCredentials() {
         /** @var $http GuzzleHttp\ClientInterface */
         $http = $this->mockery('GuzzleHttp\ClientInterface');

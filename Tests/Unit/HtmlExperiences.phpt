@@ -13,18 +13,12 @@ use Battleknight\Bot;
 require __DIR__ . '/../bootstrap.php';
 
 final class HtmlExperiences extends Tester\TestCase {
-    private $dom;
-
-    public function setUp() {
-        parent::setUp();
-        $this->dom = new \DOMDocument();
-        @$this->dom->loadHTMLFile(__DIR__ . '/../fight.html');
-    }
-
     public function testActual() {
+        $dom = new \DOMDocument();
+        @$dom->loadHTML('<span class="count" id="levelCount">4</span>');
         Assert::same(
             4,
-            (new Bot\HtmlExperiences($this->dom))->actual()
+            (new Bot\HtmlExperiences($dom))->actual()
         );
     }
 

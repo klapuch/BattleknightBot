@@ -21,7 +21,10 @@ final class HtmlKnight extends TestCase\Mockery {
     public function setUp() {
         parent::setUp();
         $this->dom = new \DOMDocument();
-        @$this->dom->loadHTMLFile(__DIR__ . '/../fight.html');
+        @$this->dom->loadHTML('
+            <span class="count" id="lifeCount">75</span>
+            <span class="count" id="silverCount">57</span>
+        ');
     }
     
     public function testLife() {

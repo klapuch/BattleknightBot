@@ -15,7 +15,7 @@ final class IniEnemies implements Enemies {
         $enemies = $this->ini->read();
         return array_reduce(
             array_keys($enemies),
-            function($previous, $id) use($enemies) {
+            function($previous, int $id) use($enemies) {
                 $previous[] = new ConstantEnemy($id, $enemies[$id]);
                 return $previous;
             }

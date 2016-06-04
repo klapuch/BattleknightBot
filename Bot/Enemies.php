@@ -20,7 +20,7 @@ interface Enemies {
      * Move enemy to the bottom of all the enemies
      * @param Enemy $enemy
      * @throws \UnexpectedValueException
-     * @return void
+     * @return Enemies
      */
-    public function toBottom(Enemy $enemy);
+    public function toBottom(Enemy $enemy): self;
 }

@@ -39,8 +39,7 @@ final class IniEnemies extends Tester\TestCase {
         );
     }
 
-    public function testPostponingEnemy() {
-        Tester\Environment::skip('Not implemented yet');
+    public function testMovingToTheBottom() {
         $ini = new Ini\Fake([1234 => 'foo', 6789 => 'bar', 666 => 'middle']);
         $enemies = new Bot\IniEnemies($ini);
         $enemies->toBottom(new Bot\ConstantEnemy(1234, 'foo'));

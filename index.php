@@ -25,20 +25,20 @@ try {
         $enemies->toBottom($enemy);
         if($duel->draw())
             throw new \Exception('Draw - nobody wins');
-        sprintf(
+        printf(
             '%s won %d silvers and %d experiences',
             $duel->winner(),
             $duel->loot()->silvers(),
             $duel->loot()->experience()->value()
         );
         echo "\r\n";
-        sprintf(
+        printf(
             'You have done %d damage and enemy to you %d',
             $duel->damage()->done(),
             $duel->damage()->taken()
         );
         echo "\r\n";
-        sprintf(
+        printf(
             'After fight you have %d life, %d experiences and %d silvers',
             $knight->life(),
             $knight->experiences()->actual(),

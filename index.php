@@ -44,7 +44,9 @@ try {
             $knight->experiences()->actual(),
             $knight->silvers()
         );
+        echo "\r\n";
         printf('Waiting to next fight for %d seconds...', $setting['break']);
+        echo "\r\n";
         sleep($setting['break']);
     }
 } catch(\Throwable $ex) {
